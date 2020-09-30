@@ -56,15 +56,15 @@ window.renderStatistics = function (ctx, players, times) {
     CLOUD_Y + GAP / 2 + LITTLE_GAP + FONT_GAP
   );
 
-  var saturation = getRandomInRange (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  var getRandomInRange = function (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min
   };
 
-  getRandomInRange(1, 100);
+  var saturation = getRandomInRange(1, 100);
 
 
-  for (var i = 0; i < players.length; i++) {
-    if (players[i] === 'Вы') {
+  for (var j = 0; j < players.length; j++) {
+    if (players[j] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
       ctx.fillStyle = 'hsl(240, saturation, 20%)';
