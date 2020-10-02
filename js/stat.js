@@ -1,25 +1,25 @@
 'use strict';
 
-var CLOUD_WIDTH = 420;
-var CLOUD_HEIGHT = 270;
-var CLOUD_X = 100;
-var CLOUD_Y = 10;
-var GAP = 50;
-var LITTLE_GAP = 10;
-var FONT_GAP = 16;
-var TEXT_WIDTH = 50;
-var BAR_WIDTH = 40;
-var barHeight = CLOUD_HEIGHT - GAP - TEXT_WIDTH - GAP;
+const CLOUD_WIDTH = 420;
+const CLOUD_HEIGHT = 270;
+const CLOUD_X = 100;
+const CLOUD_Y = 10;
+const GAP = 50;
+const LITTLE_GAP = 10;
+const FONT_GAP = 16;
+const TEXT_WIDTH = 50;
+const BAR_WIDTH = 40;
+const barHeight = CLOUD_HEIGHT - GAP - TEXT_WIDTH - GAP;
 
-var renderCloud = function (ctx, x, y, color) {
+const renderCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-var getMaxElement = function (arr) {
-  var maxElement = arr[0];
+const getMaxElement = function (arr) {
+  const maxElement = arr[0];
 
-  for (var i = 1; i < arr.length; i++) {
+  for (const i = 1; i < arr.length; i++) {
     if (arr[i] > maxElement) {
       maxElement = arr[i];
     }
@@ -56,24 +56,13 @@ window.renderStatistics = function (ctx, players, times) {
     CLOUD_Y + GAP / 2 + LITTLE_GAP + FONT_GAP
   );
 
-  var getRandomInRange = function (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min
+  const getRandomInRange = function (min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
-  var saturation = getRandomInRange(1, 100);
+  const maxTime = getMaxElement(times);
 
-
-  for (var j = 0; j < players.length; j++) {
-    if (players[j] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    } else {
-      ctx.fillStyle = 'hsl(240, saturation, 20%)';
-    }
-  }
-
-  var maxTime = getMaxElement(times);
-
-  for (var i = 0; i < players.length; i++) {
+  for (const i = 0; i < players.length; i++) {
     ctx.fillText(
       Math.round(times[i]),
       CLOUD_X + GAP + (BAR_WIDTH + GAP) * i,
@@ -90,5 +79,11 @@ window.renderStatistics = function (ctx, players, times) {
       CLOUD_X + GAP + (BAR_WIDTH + GAP) * i,
       CLOUD_Y + CLOUD_HEIGHT - GAP / 2
     );
+    if (players[i] === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    } else {
+      ctx.fillStyle = `hsl(240, ${saturation}%, 20%)`;
+    }
+    const saturation = getRandomInRange(1, 100);
   };
-}
+};
